@@ -3,7 +3,7 @@ var startingWidth;
 var startingHeight;
 
 function preload() {
-  img = loadImage("assets/monaLisa.jpg");
+  img = loadImage("assets/who.jpg");
 }
 
 function setup() {
@@ -16,7 +16,7 @@ function setup() {
 }
 
 function draw() {
-  if (frameCount<100 && img.height>50 && img.width>50) {
+  if (img.height>50 && img.width>50) {
     //scale(width/startingWidth, height/startingHeight);
     scale(startingWidth/img.width, startingHeight/img.height);
     image(img, 0, 0);

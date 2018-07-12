@@ -1,6 +1,6 @@
 var gif;
-var fileName = 'cat.webm';
-var gifSaved = true;
+var fileName = 'monaLisa.webm';
+var gifSaved = false;
 
 function initalizeGif() {
  gif = new CCapture({

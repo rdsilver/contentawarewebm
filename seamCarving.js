@@ -1,9 +1,15 @@
 function seamCarving() {
+  if (frameCount%2 == 0)
+    rotateImage();
+
   img.loadPixels();
   var sobelData = getSobelData(img.imageData);
   var energyData = getEnergyArray(sobelData);
   var seam = getSeamIndex(energyData);
   removeSeam(seam);
+
+  if (frameCount%2 == 0)
+    rotateImage();
 }
 
 function rotateImage() {
