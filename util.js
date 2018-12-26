@@ -10,6 +10,16 @@ function createArray(length) {
   return arr;
 }
 
+function removeSeam(seam, pixels) {
+  for (let i = 0; i < seam.length; i+=4) {
+      let dropIndex = seam[i];
+      let nextDrop = seam[i + 4];
+      pixels.copyWithin(dropIndex - i, dropIndex+4, nextDrop);
+  }
+
+  return pixels.subarray(0, pixels.length - seam.length);
+}
+
 function rotatePixelArray(pixelArray,w,h) {
   var rotatedArray = [];
 
@@ -24,8 +34,4 @@ function rotatePixelArray(pixelArray,w,h) {
   }
 
   return new Uint8ClampedArray(rotatedArray);
-}
-
-function timeTaken(func) {
-  func();
 }

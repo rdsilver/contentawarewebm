@@ -3,12 +3,13 @@ function seamCarving() {
     rotateImage();
 
   img.loadPixels();
+
   var sobelData = getSobelData(img.imageData);
   var energyData = getEnergyArray(sobelData);
   var seam = getSeamIndex(energyData);
-  removeSeam(seam);
+  createNewPixelArray(seam);
 
-  if (frameCount%2 == 0)
+  if (frameCount%2 == 0) 
     rotateImage();
 }
 
@@ -96,27 +97,13 @@ function getSeamIndex(energyArray) {
   return rgbaIndexes;
 }
 
-function removeSeam(seam) {
+function createNewPixelArray(seam) {
   img.loadPixels();
-  var newPixelArray = createNewPixelArray(seam, img.pixels).reverse();
+  var newPixelArray = removeSeam(seam.reverse(), img.pixels);
   img = createImage(img.width-1, img.height);
 
   img.loadPixels();
   for(var i=0;i<img.pixels.length;i++)
     img.pixels[i] = newPixelArray[i];
   img.updatePixels();
-}
-
-function createNewPixelArray(seam, pixels) {
-  var newPixelArray = [];
-
-  for(var i=pixels.length-1;i>=0;i--) {
-    if (i != seam[0]) {
-      newPixelArray.push(pixels[i]);
-    } else {
-      seam.shift();
-    }
-  }
-
-  return newPixelArray;
 }
