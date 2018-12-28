@@ -21,17 +21,18 @@ function removeSeam(seam, pixels) {
 }
 
 function rotatePixelArray(pixelArray,w,h) {
-  var rotatedArray = [];
+  var newPixelArray = new Uint8ClampedArray(pixelArray.length);
+  var counter = 0;
 
   for (var x=0;x<w;x++) {
     for(var y=0;y<h;y++) {
       index = (x+y*w)*4;
-      rotatedArray.push(pixelArray[index]);
-      rotatedArray.push(pixelArray[index+1]);
-      rotatedArray.push(pixelArray[index+2]);
-      rotatedArray.push(pixelArray[index+3]);
+      newPixelArray[counter++] = pixelArray[index];
+      newPixelArray[counter++] = pixelArray[index+1];
+      newPixelArray[counter++] = pixelArray[index+2];
+      newPixelArray[counter++] = pixelArray[index+3];
     }
   }
 
-  return new Uint8ClampedArray(rotatedArray);
+  return newPixelArray;
 }

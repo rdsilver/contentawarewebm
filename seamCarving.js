@@ -1,12 +1,14 @@
+var seam = [];
+
 function seamCarving() {
   if (frameCount%2 == 0)
     rotateImage();
 
   img.loadPixels();
 
-  var sobelData = getSobelData(img.imageData);
+  var sobelData = getSobelData(img.imageData, seam);
   var energyData = getEnergyArray(sobelData);
-  var seam = getSeamIndex(energyData);
+  seam = getSeamIndex(energyData);
   createNewPixelArray(seam);
 
   if (frameCount%2 == 0) 
@@ -23,8 +25,8 @@ function rotateImage() {
   img.updatePixels();
 }
 
-function getSobelData(imageData) {
-  var sobel = Sobel(imageData);
+function getSobelData(imageData, seam) {
+  var sobel = Sobel(imageData, seam);
   var sobelData = sobel.toImageData();
   return sobelData;
 }

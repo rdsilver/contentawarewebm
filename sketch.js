@@ -13,12 +13,16 @@ function setup() {
   startingWidth = img.width;
   startingHeight = img.height;
   image(img, 0, 0);
+  initalizeGif();
 }
 
 function draw() {
-  if (frameCount < 100) {
+  if (img.width > 10) {
+    captureGifFrame();
     scale(startingWidth/img.width, startingHeight/img.height);
     seamCarving();
     image(img, 0, 0);
+  } else if (!isGifSaved()) {
+    createGif();
   }
 }
